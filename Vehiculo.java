@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 public class Vehiculo{
 
-    private final int velocidad = 5;
+    private final int velocidad = 3;
 
     private int horientacion;
     private int color;

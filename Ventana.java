@@ -1,15 +1,15 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
 public class Ventana extends JFrame {
-
-    private JPanel panel = new JPanel();
+    private static final long serialVersionUID = 1L;
+    
+    private Pista pst = new Pista();
     private JButton btn = new JButton();
-    private Vehiculo aut1 = new Vehiculo(100, 200,4,2);
+    private Vehiculo aut1 = new Vehiculo(100, 200,1,1);
 
     public Ventana(){
         inicializarVentana();
@@ -25,9 +25,9 @@ public class Ventana extends JFrame {
     }
 
     private void componentes(){
-        panel.setLayout(null);
-        panel.add(aut1.getCar());
-        this.getContentPane().add(panel);
+        pst.setLayout(null);
+        pst.add(aut1.getCar());
+        this.getContentPane().add(pst);
         bontoComp();
     }
 
@@ -40,12 +40,11 @@ public class Ventana extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                aut1.avanzar();
-
+                aut1.avanzar();            
             }
         };
         btn.addActionListener(press);
-        panel.add(btn);
+        pst.add(btn);
     }
 
     public static void main(String[] args) {
