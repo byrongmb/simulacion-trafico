@@ -37,6 +37,12 @@ public class Vehiculo{
             case 1:
                 this.posX += velocidad;
                 break;
+            case 2:
+                this.posX -= velocidad;
+                break;
+            case 3:
+                this.posY -= velocidad;
+                break;
             case 4:
                 this.posY += velocidad;
                 break;
