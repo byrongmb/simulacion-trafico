@@ -90,10 +90,4 @@ public class Semaforo {
     public int getEstado(){
         return this.estado;
     }
-
-
-
-
-
-    
 }

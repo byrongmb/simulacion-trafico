@@ -1,20 +1,25 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 
 
 public class Ventana extends JFrame {
     private static final long serialVersionUID = 1L;
     private JButton btn = new JButton();
+    private Timer semaforos = new Timer();
+    private Timer autos = new Timer();
+
     //Pista
     private Pista pst = new Pista();
     //Autos
     private Vehiculo aut1 = new Vehiculo(0, 300,1,1);
     private Vehiculo aut2 = new Vehiculo(400, 0,4,2);
     //Semaforos
-    private Semaforo smf1 = new Semaforo(280,400,3);
-    private Semaforo smf2 = new Semaforo(550,85,1);
+    private Semaforo smf1 = new Semaforo(280,400,1);
+    private Semaforo smf2 = new Semaforo(550,85,3);
 
     public Ventana(){
         inicializarVentana();
@@ -36,7 +41,6 @@ public class Ventana extends JFrame {
         compSemaforos();
         compBoton();
     }
-
     private void compAutos()
     {
         pst.add(aut1.getCar());
@@ -47,7 +51,6 @@ public class Ventana extends JFrame {
         pst.add(smf1.getSmf());
         pst.add(smf2.getSmf());
     }
-
     private void compBoton()
     {
         btn.setText("Iniciar");
@@ -57,13 +60,44 @@ public class Ventana extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                aut1.avanzar();
-                aut2.avanzar();               
+                cambiarColor();
+                moverAutos();              
             }
         };
         btn.addActionListener(press);
         pst.add(btn);
     }
+
+    private void cambiarColor()
+    {
+        TimerTask tarea = new TimerTask(){
+        
+            @Override
+            public void run() {
+                smf1.cambiarEstado();
+                smf2.cambiarEstado();
+            }
+        };
+        semaforos.schedule(tarea, 2000, 7000);
+    }
+    private void moverAutos()
+    {
+        TimerTask verificar = new TimerTask(){
+            @Override
+            public void run() {
+                if(smf1.getEstado() == 3){
+                    aut1.avanzar();
+                }
+                if(smf2.getEstado() == 3)
+                {
+                    aut2.avanzar();
+                }
+            }
+        };
+        autos.schedule(verificar, 200,50);
+    }
+
+
 
     public static void main(String[] args) {
         Ventana vnt = new Ventana();
