@@ -9,8 +9,6 @@ public class Semaforo {
     private int posX;
     private int posY;
     
-
-
     public Semaforo(int posX, int posY){
         this.estado = 0;
         this.posX = posX;
