@@ -5,21 +5,94 @@ import javax.swing.JLabel;
 
 public class Vehiculo{
 
+    private final int velocidad = 5;
+
+    private int horientacion;
+    private int color;
+
     private JLabel car = new JLabel();
     private int posX;
     private int posY;
-    private String imagenUrl = "img//car_red.png";
 
     public Vehiculo(int posX, int posY) {
-        ImageIcon imagen = new ImageIcon(imagenUrl);
-        car.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH))); 
-        car.setBounds(posX, posY, 200, 200);
+        this.posX = posX;
+        this.posY = posY;
+        this.horientacion = 1;
+        this.color = 1;
+        crearAuto(horientacion, color); 
+        crearAuto(1,1);        
     }
 
-    public void mover(){
+    public Vehiculo(int posX, int posY, int horientacion, int color) {
+        this.posX = posX;
+        this.posY = posY;
+        this.horientacion = horientacion;
+        this.color = color;
+        crearAuto(horientacion, color);        
+    }
 
-        
+    public void avanzar()
+    {
+        switch (horientacion) {
+            case 1:
+                this.posX += velocidad;
+                break;
+            case 4:
+                this.posY += velocidad;
+                break;
+            default:
+                break;
+        }
+        car.setLocation(posX, posY);
+    }
 
+    public void crearAuto(int horientacion, int color)
+    {
+        String imagenUrl;
+        if(color == 1){
+            switch (horientacion) {
+                case 1:
+                    imagenUrl = "img//car1Right.png";                    
+                    break;
+                case 2:
+                    imagenUrl = "img//car1Left.png";                    
+                    break;
+                case 3:
+                    imagenUrl = "img//car1Up.png";                    
+                    break;
+                case 4:
+                    imagenUrl = "img//car1Down.png";                    
+                    break;
+                default:
+                    imagenUrl = "img//car1Left.png";
+                    this.horientacion = 1;                    
+                    break;
+            }
+        }
+        else{
+            switch (horientacion) {
+                case 1:
+                    imagenUrl = "img//car2Right.png";                    
+                    break;
+                case 2:
+                    imagenUrl = "img//car2Left.png";                    
+                    break;
+                case 3:
+                    imagenUrl = "img//car2Up.png";                    
+                    break;
+                case 4:
+                    imagenUrl = "img//car2Down.png";                    
+                    break;
+                default:
+                    imagenUrl = "img//car2Right.png";
+                    this.horientacion = 1;                    
+                    break;
+            }
+            this.color = 2;
+        }
+        ImageIcon imagen = new ImageIcon(imagenUrl);
+        car.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH))); 
+        car.setBounds(posX, posY, 200, 200);
     }
 
     //Getters and Setters

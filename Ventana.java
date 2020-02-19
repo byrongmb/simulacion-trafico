@@ -1,13 +1,15 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Ventana extends JFrame {
 
     private JPanel panel = new JPanel();
     private JButton btn = new JButton();
-    private Vehiculo aut1 = new Vehiculo(100, 200);
+    private Vehiculo aut1 = new Vehiculo(100, 200,4,2);
 
     public Ventana(){
         inicializarVentana();
@@ -33,6 +35,16 @@ public class Ventana extends JFrame {
     {
         btn.setText("Iniciar");
         btn.setBounds(400, 600, 100, 50);
+        ActionListener press = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                aut1.avanzar();
+
+            }
+        };
+        btn.addActionListener(press);
         panel.add(btn);
     }
 
