@@ -98,7 +98,7 @@ public class Vehiculo{
         }
         ImageIcon imagen = new ImageIcon(imagenUrl);
         car.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH))); 
-        car.setBounds(posX, posY, 200, 200);
+        car.setBounds(posX, posY, 160, 160);
     }
 
     //Getters and Setters

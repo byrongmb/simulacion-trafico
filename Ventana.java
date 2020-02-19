@@ -6,10 +6,15 @@ import java.awt.event.ActionEvent;
 
 public class Ventana extends JFrame {
     private static final long serialVersionUID = 1L;
-    
-    private Pista pst = new Pista();
     private JButton btn = new JButton();
-    private Vehiculo aut1 = new Vehiculo(100, 200,1,1);
+    //Pista
+    private Pista pst = new Pista();
+    //Autos
+    private Vehiculo aut1 = new Vehiculo(0, 300,1,1);
+    private Vehiculo aut2 = new Vehiculo(400, 0,4,2);
+    //Semaforos
+    private Semaforo smf1 = new Semaforo(280,400,3);
+    private Semaforo smf2 = new Semaforo(550,85,1);
 
     public Ventana(){
         inicializarVentana();
@@ -26,12 +31,24 @@ public class Ventana extends JFrame {
 
     private void componentes(){
         pst.setLayout(null);
-        pst.add(aut1.getCar());
         this.getContentPane().add(pst);
-        bontoComp();
+        compAutos();
+        compSemaforos();
+        compBoton();
     }
 
-    private void bontoComp()
+    private void compAutos()
+    {
+        pst.add(aut1.getCar());
+        pst.add(aut2.getCar());
+    }
+    private void compSemaforos()
+    {
+        pst.add(smf1.getSmf());
+        pst.add(smf2.getSmf());
+    }
+
+    private void compBoton()
     {
         btn.setText("Iniciar");
         btn.setBounds(400, 600, 100, 50);
@@ -40,7 +57,8 @@ public class Ventana extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                aut1.avanzar();            
+                aut1.avanzar();
+                aut2.avanzar();               
             }
         };
         btn.addActionListener(press);
