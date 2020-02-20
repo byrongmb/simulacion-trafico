@@ -9,17 +9,19 @@ import java.awt.event.ActionEvent;
 public class Ventana extends JFrame {
     private static final long serialVersionUID = 1L;
     private JButton btn = new JButton();
+    int i = 0;
+
     private Timer semaforos = new Timer();
     private Timer autos = new Timer();
 
     //Pista
     private Pista pst = new Pista();
     //Autos
-    private Vehiculo aut1 = new Vehiculo(0, 300,1,1);
-    private Vehiculo aut2 = new Vehiculo(400, 0,4,2);
+    private Vehiculo aut1;
+    private Vehiculo aut2;
     //Semaforos
-    private Semaforo smf1 = new Semaforo(280,400,1);
-    private Semaforo smf2 = new Semaforo(550,85,3);
+    private Semaforo smf1 = new Semaforo(280,400,3);
+    private Semaforo smf2 = new Semaforo(550,85,1);
 
     public Ventana(){
         inicializarVentana();
@@ -33,7 +35,6 @@ public class Ventana extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
     }
-
     private void componentes(){
         pst.setLayout(null);
         this.getContentPane().add(pst);
@@ -43,6 +44,8 @@ public class Ventana extends JFrame {
     }
     private void compAutos()
     {
+        aut1 = new Vehiculo(0, 300,1,1);
+        aut2 = new Vehiculo(400, 0,4,2);
         pst.add(aut1.getCar());
         pst.add(aut2.getCar());
     }
@@ -61,15 +64,15 @@ public class Ventana extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 cambiarColor();
-                moverAutos();              
+                moverAutos();
+                btn.setEnabled(false);             
             }
         };
         btn.addActionListener(press);
         pst.add(btn);
     }
 
-    private void cambiarColor()
-    {
+    private void cambiarColor(){
         TimerTask tarea = new TimerTask(){
         
             @Override
@@ -78,27 +81,36 @@ public class Ventana extends JFrame {
                 smf2.cambiarEstado();
             }
         };
-        semaforos.schedule(tarea, 2000, 7000);
+        semaforos.schedule(tarea, 8200, 6200);
     }
-    private void moverAutos()
-    {
+    private void moverAutos(){
         TimerTask verificar = new TimerTask(){
             @Override
             public void run() {
+
                 if(smf1.getEstado() == 3){
                     aut1.avanzar();
                 }
-                if(smf2.getEstado() == 3)
-                {
+                else{
+                    if(i < 20){
+                        aut1.avanzar();
+                        i++;
+                    }
+                }
+                if(smf2.getEstado() == 3){
                     aut2.avanzar();
+                }
+                else{
+                    if(i < 20){
+                        aut2.avanzar();
+                        i++;
+                    }
                 }
             }
         };
+        i = 0;
         autos.schedule(verificar, 200,50);
     }
-
-
-
     public static void main(String[] args) {
         Ventana vnt = new Ventana();
         vnt.setVisible(true);

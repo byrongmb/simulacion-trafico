@@ -1,11 +1,9 @@
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Vehiculo{
-
-    private final int velocidad = 4;
+    private final int velocidad = 5; 
 
     private int horientacion;
     private int color;
@@ -13,8 +11,12 @@ public class Vehiculo{
     private final JLabel car = new JLabel();
     private int posX;
     private int posY;
+    private int posXIni;
+    private int posYIni;
 
     public Vehiculo(final int posX, final int posY) {
+        this.posXIni = posX;
+        this.posYIni = posY;
         this.posX = posX;
         this.posY = posY;
         this.horientacion = 1;
@@ -24,6 +26,8 @@ public class Vehiculo{
     }
 
     public Vehiculo(final int posX, final int posY, final int horientacion, final int color) {
+        this.posXIni = posX;
+        this.posYIni = posY;
         this.posX = posX;
         this.posY = posY;
         this.horientacion = horientacion;
@@ -34,23 +38,21 @@ public class Vehiculo{
     public void avanzar() {
         switch (horientacion) {
             case 1:
-                posX += velocidad;
-                car.setLocation(posX, posY);
+                posX += velocidad;                
                 break;
             case 2:
                 posX -= velocidad;
-                car.setLocation(posX, posY);
                 break;
             case 3:
                 posY -= velocidad;
-                car.setLocation(posX, posY);
                 break;
             default:
                 posY += velocidad;
-                car.setLocation(posX, posY);
                 break;
         }
+        car.setLocation(posX, posY);
     }
+
     public void crearAuto(final int horientacion, final int color) {
         String imagenUrl;
         if (color == 1) {
@@ -98,6 +100,10 @@ public class Vehiculo{
         car.setBounds(posX, posY, 160, 160);
     }
 
+    public void inicializarPosicion(){
+        this.posX = posXIni;
+        this.posY = posYIni;
+    }
     // Getters and Setters
     public JLabel getCar() {
         return this.car;
@@ -118,5 +124,4 @@ public class Vehiculo{
     public void setPosX(final int posX) {
         this.posX = posX;
     }
-
 }
