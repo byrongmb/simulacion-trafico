@@ -56,7 +56,6 @@ public class Semaforo {
                 this.estado = 2;
                 break;
         }
-
     }
 
     private void estadoOff(){
@@ -87,6 +86,8 @@ public class Semaforo {
     public JLabel getSmf(){
         return this.smf;
     }
+
+
     public int getEstado(){
         return this.estado;
     }

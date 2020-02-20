@@ -52,6 +52,23 @@ public class Vehiculo{
         }
         car.setLocation(posX, posY);
     }
+    public void reiniciar() {
+        switch (horientacion) {
+            case 1:
+                posX = posXIni;                
+                break;
+            case 2:
+                posX = posXIni;
+                break;
+            case 3:
+                posY = posYIni;
+                break;
+            default:
+                posY = posYIni;
+                break;
+        }
+        car.setLocation(posX, posY);
+    }
 
     public void crearAuto(final int horientacion, final int color) {
         String imagenUrl;
@@ -100,10 +117,6 @@ public class Vehiculo{
         car.setBounds(posX, posY, 160, 160);
     }
 
-    public void inicializarPosicion(){
-        this.posX = posXIni;
-        this.posY = posYIni;
-    }
     // Getters and Setters
     public JLabel getCar() {
         return this.car;
