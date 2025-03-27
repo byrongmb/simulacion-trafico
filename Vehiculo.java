@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 public class Vehiculo{
     private final int velocidad = 5; 
 
-    private int horientacion;
+    private int orientacion;
     private int color;
 
     private final JLabel car = new JLabel();
@@ -21,22 +21,22 @@ public class Vehiculo{
         this.posY = posY;
         this.horientacion = 1;
         this.color = 1;
-        crearAuto(horientacion, color);
+        crearAuto(orientacion, color);
         crearAuto(1, 1);
     }
 
-    public Vehiculo(final int posX, final int posY, final int horientacion, final int color) {
+    public Vehiculo(final int posX, final int posY, final int orientacion, final int color) {
         this.posXIni = posX;
         this.posYIni = posY;
         this.posX = posX;
         this.posY = posY;
-        this.horientacion = horientacion;
+        this.orientacion = orientacion;
         this.color = color;
-        crearAuto(horientacion, color);
+        crearAuto(orientacion, color);
     }
 
     public void avanzar() {
-        switch (horientacion) {
+        switch (orientacion) {
             case 1:
                 posX += velocidad;                
                 break;
@@ -53,7 +53,7 @@ public class Vehiculo{
         car.setLocation(posX, posY);
     }
     public void reiniciar() {
-        switch (horientacion) {
+        switch (orientacion) {
             case 1:
                 posX = posXIni;                
                 break;
@@ -70,10 +70,10 @@ public class Vehiculo{
         car.setLocation(posX, posY);
     }
 
-    public void crearAuto(final int horientacion, final int color) {
+    public void crearAuto(final int orientacion, final int color) {
         String imagenUrl;
         if (color == 1) {
-            switch (horientacion) {
+            switch (orientacion) {
                 case 1:
                     imagenUrl = "img//car1Right.png";
                     break;
@@ -88,11 +88,11 @@ public class Vehiculo{
                     break;
                 default:
                     imagenUrl = "img//car1Left.png";
-                    this.horientacion = 1;
+                    this.orientacion = 1;
                     break;
             }
         } else {
-            switch (horientacion) {
+            switch (orientacion) {
                 case 1:
                     imagenUrl = "img//car2Right.png";
                     break;
@@ -107,7 +107,7 @@ public class Vehiculo{
                     break;
                 default:
                     imagenUrl = "img//car2Right.png";
-                    this.horientacion = 1;
+                    this.orientacion = 1;
                     break;
             }
             this.color = 2;
